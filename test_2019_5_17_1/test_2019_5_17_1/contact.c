@@ -161,3 +161,8 @@ void SortContact(Contact* pcon)//冒泡排序
 			break;
 	}
 }
+void EmptyContact(Contact *pcon)
+{
+	pcon->sz = 0;
+	printf("清空成功!!\n");
+}
