@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include "contact.h"
-void InitContact(Contact* pcon)//³õÊ¼»¯
+void InitContact(Contact* pcon)//åˆå§‹åŒ–
 {
 	assert(pcon != NULL);
 	pcon->sz = 0;
@@ -11,19 +11,19 @@ void AddContact(Contact* pcon)
 	assert(pcon != NULL);
 	if (pcon->sz == MAX)
 	{
-		printf("Í¨Ñ¶Â¼ÒÑÂú£¬ÎŞ·¨Ìí¼Ó!\n");
+		printf("é€šè®¯å½•å·²æ»¡ï¼Œæ— æ³•æ·»åŠ !\n");
 	}
 	else
 	{
-		printf("ÇëÊäÈëÃû×Ö:");
-		scanf("%s", pcon->data[pcon->sz].name);//Êı×éÃûÊÇµØÖ·£¬²»ÓÃÊäÈë&
-		printf("ÇëÊäÈëÄêÁä:");
-		scanf("%d", &(pcon->data[pcon->sz].age));//ÕâÊÇ¸ö±äÁ¿£¬ÒªÈ¡µØÖ·
-		printf("ÇëÊäÈëĞÔ±ğ:");
+		printf("è¯·è¾“å…¥åå­—:");
+		scanf("%s", pcon->data[pcon->sz].name);//æ•°ç»„åæ˜¯åœ°å€ï¼Œä¸ç”¨è¾“å…¥&
+		printf("è¯·è¾“å…¥å¹´é¾„:");
+		scanf("%d", &(pcon->data[pcon->sz].age));//è¿™æ˜¯ä¸ªå˜é‡ï¼Œè¦å–åœ°å€
+		printf("è¯·è¾“å…¥æ€§åˆ«:");
 		scanf("%s", pcon->data[pcon->sz].sex);
-		printf("ÇëÊäÈëµç»°:");
+		printf("è¯·è¾“å…¥ç”µè¯:");
 		scanf("%s", pcon->data[pcon->sz].tele);
-		printf("ÇëÊäÈëµØÖ·:");
+		printf("è¯·è¾“å…¥åœ°å€:");
 		scanf("%s", pcon->data[pcon->sz].addr);
 		pcon->sz++;
 	}
@@ -31,9 +31,9 @@ void AddContact(Contact* pcon)
 void ShowContact(const Contact* pcon)
 {
 	int i = 0;
-	//Ãû×Ö  ÄêÁä  ĞÔ±ğ  µç»°  µØÖ·
-	//ÕÅÈı  20    ÄĞ    123   Î÷°²
-	printf("%10s\t%4d\t%4s\t%12s\t%15s\n", "Ãû×Ö", "ÄêÁä", "ĞÔ±ğ", "µç»°", "µØÖ·");
+	//åå­—  å¹´é¾„  æ€§åˆ«  ç”µè¯  åœ°å€
+	//å¼ ä¸‰  20    ç”·    123   è¥¿å®‰
+	printf("%10s\t%4s\t%4s\t%12s\t%15s\n", "åå­—", "å¹´é¾„", "æ€§åˆ«", "ç”µè¯", "åœ°å€");
 	for (i = 0; i < pcon->sz; i++)
 	{
 		printf("%10s\t%4d\t%4s\t%12s\t%15s\n",
@@ -42,7 +42,7 @@ void ShowContact(const Contact* pcon)
 			pcon->data[i].sex,
 			pcon->data[i].tele,
 			pcon->data[i].addr);
-		   //´òÓ¡Ò»¸öÈËµÄĞÅÏ¢
+		   //æ‰“å°ä¸€ä¸ªäººçš„ä¿¡æ¯
 	}	
 }
 static int FindEntry(Contact* pcon, char name[])
@@ -57,93 +57,95 @@ static int FindEntry(Contact* pcon, char name[])
 	}
 	return - 1;
 }
-void DelContact(Contact* pcon)
+void DelContact(Contact *pcon)
 {
-	//²éÕÒ
 	int i = 0;
 	int j = 0;
-	int pos = 0;
-	char name[MAX_NAME] = { 0 };//ÁÙÊ±Êı×é
-	printf("ÇëÊäÈëÄãÒªÉ¾³ıÈËµÄÃû×Ö:");
+	int ret = 0;
+	char name[MAX_Name] = { 0 };
+	printf("è¯·è¾“å…¥è¦åˆ é™¤çš„äººçš„åå­—:> ");
 	scanf("%s", &name);
 	if (pcon->sz == 0)
 	{
-		printf("Í¨Ñ¶Â¼ÒÑ¿Õ£¬ÎŞ·¨É¾³ı!\n");
+		printf("é€šè®¯å½•å·²ç©ºï¼Œæ— æ³•åˆ é™¤!\n");
 		return;
 	}
-	pos=FindEntry(pcon, name);
-	if (pos == -1)
+	ret = Find(pcon, name);
+	if (ret==-1)
 	{
-		printf("ÒªÉ¾³ıµÄÈË²»´æÔÚ\n");
+		printf("è¦åˆ é™¤çš„äººä¸å­˜åœ¨!\n");
 		return;
 	}
-	//É¾³ı
-	for (j = i; j <pcon->sz-1; j++)
+	if (ret != -1 && ret <= pcon->sz)
 	{
-		pcon->data[j] = pcon->data[j + 1];
+		//åˆ é™¤
+		for (j = ret; j < pcon->sz - 1; ++j)
+		{
+			pcon->data[j] = pcon->data[j + 1];
+		}
 	}
 	pcon->sz--;
-	printf("É¾³ı³É¹¦\n");
+	printf("åˆ é™¤æˆåŠŸ!\n");
 }
 void SearchContact(Contact* pcon)
 {
 	char name[MAX_NAME] = { 0 };
 	int pos = 0;
 	assert(pcon != NULL);
-	printf("ÇëÊäÈëÒª²éÕÒµÄÈËµÄÃû×Ö£º");
+	printf("è¯·è¾“å…¥è¦æŸ¥æ‰¾çš„äººçš„åå­—ï¼š");
 	scanf("%s", &name);
 	pos = FindEntry(pcon, name);
 	if (pos == -1)
 	{
-		printf("Òª²éÕÒµÄÈËµÄĞÅÏ¢²»´æÔÚ\n");
+		printf("è¦æŸ¥æ‰¾çš„äººçš„ä¿¡æ¯ä¸å­˜åœ¨\n");
 	}
 	else if (pos != -1)
 	{
-		printf("%10s\t%4d\t%4s\t%12s\t%15s\n", "Ãû×Ö", "ÄêÁä", "ĞÔ±ğ", "µç»°", "µØÖ·");
+		printf("%10s\t%4d\t%4s\t%12s\t%15s\n", "åå­—", "å¹´é¾„", "æ€§åˆ«", "ç”µè¯", "åœ°å€");
 		printf("%10s\t%4d\t%4s\t%12s\t%15s\n",
 			pcon->data[pos].name,
 			pcon->data[pos].age,
 			pcon->data[pos].sex,
 			pcon->data[pos].tele,
-			pcon->data[pos].addr);//´òÓ¡Ò»¸öÈËµÄĞÅÏ¢
+			pcon->data[pos].addr);//æ‰“å°ä¸€ä¸ªäººçš„ä¿¡æ¯
 	}
 	else
-		printf("ÒªÕÒµÄÈË²»´æÔÚ!\n");
+		printf("è¦æ‰¾çš„äººä¸å­˜åœ¨!\n");
 }
 void ModifyContact(Contact* pcon)
 {
 	char name[MAX_NAME] = { 0 };
 	int pos = 0;
 	assert(pcon != NULL);
-	printf("ÇëÊäÈëÒªĞŞ¸ÄµÄÈËµÄÃû×Ö£º");
+	printf("è¯·è¾“å…¥è¦ä¿®æ”¹çš„äººçš„åå­—ï¼š");
 	scanf("%s", &name);
 	pos = FindEntry(pcon, name);
 	if (pos == -1)
 	{
-		printf("ÒªĞŞ¸ÄµÄÈËµÄĞÅÏ¢²»´æÔÚ\n");
+		printf("è¦ä¿®æ”¹çš„äººçš„ä¿¡æ¯ä¸å­˜åœ¨\n");
 	}
 	else
 	{
-		printf("ÇëÊäÈëÃû×Ö:");
+		printf("è¯·è¾“å…¥åå­—:");
 		scanf("%s", pcon->data[pos].name);
-		printf("ÇëÊäÈëÄêÁä:");
+		printf("è¯·è¾“å…¥å¹´é¾„:");
 		scanf("%d", &(pcon->data[pos].age));
-		printf("ÇëÊäÈëĞÔ±ğ:");
+		printf("è¯·è¾“å…¥æ€§åˆ«:");
 		scanf("%s", pcon->data[pos].sex);
-		printf("ÇëÊäÈëµç»°:");
+		printf("è¯·è¾“å…¥ç”µè¯:");
 		scanf("%s", pcon->data[pos].tele);
-		printf("ÇëÊäÈëµØÖ·:");
+		printf("è¯·è¾“å…¥åœ°å€:");
 		scanf("%s", pcon->data[pos].addr);
 	}
 }
-void SortContact(Contact* pcon)//Ã°ÅİÅÅĞò
+void SortContact(Contact* pcon)//å†’æ³¡æ’åº
 {
-	int i = 0;//ÌËÊı
+	int i = 0;//è¶Ÿæ•°
 	assert(pcon != NULL);
 	//
 	for (i = 0; i < pcon->sz - 1; i++)
 	{
-		int flag = 1;//±íÊ¾ÒÑ¾­ÅÅĞòºÃÁË
+		int flag = 1;//è¡¨ç¤ºå·²ç»æ’åºå¥½äº†
 		int j = 0;
 		for (j = 0; j < pcon->sz - 1 - i; j++)
 		{
