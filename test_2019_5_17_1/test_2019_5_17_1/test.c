@@ -1,26 +1,23 @@
-#define _CRT_SECURE_NO_WARNINGS 1
 #include "contact.h"
 void menu()
 {
 	printf("*************************************\n");
-	printf("*************** Í¨Ñ¶Â¼ **************\n");
+	printf("*************** é€šè®¯å½• **************\n");
 	printf("***        1.add     2.del        ***\n");
 	printf("***        3.search  4.modify     ***\n");
 	printf("***        5.show    6.sort       ***\n");
-	printf("***            0. exit            ***\n");
+	printf("***        7.empty   0. exit      ***\n");
 	printf("*************************************\n");
 }
 void test()
 {
-	//´´½¨Í¨Ñ¶Â¼
-	Contact con;
+	Contact con;//å®šä¹‰é€šè®¯å½•
+	InitContact(&con);//åˆå§‹åŒ–
 	int input = 0;
-	//³õÊ¼»¯Í¨Ñ¶Â¼
-	InitContact(&con);
 	do
 	{
 		menu();
-		printf("ÇëÑ¡Ôñ:");
+		printf("è¯·é€‰æ‹©:>\n");
 		scanf("%d", &input);
 		switch (input)
 		{
@@ -42,14 +39,16 @@ void test()
 		case SORT:
 			SortContact(&con);
 			break;
+		case EMPTY:
+			EmptyContact(&con);
 		case EXIT:
-			printf("ÍË³ö£¡\n");
+			printf("é€€å‡º!\n");
 			break;
 		default:
-			printf("Ñ¡Ôñ´íÎó:\n");
-			break;
+			printf("é€‰æ‹©é”™è¯¯!\n");
+			break;	
 		}
-	}while(input);
+	} while (input);
 }
 int main()
 {
