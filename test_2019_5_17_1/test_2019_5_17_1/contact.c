@@ -101,7 +101,7 @@ void SearchContact(Contact* pcon)
 	}
 	else if (pos != -1)
 	{
-		printf("%10s\t%4d\t%4s\t%12s\t%15s\n", "名字", "年龄", "性别", "电话", "地址");
+		printf("%10s\t%4s\t%4s\t%12s\t%15s\n", "名字", "年龄", "性别", "电话", "地址");
 		printf("%10s\t%4d\t%4s\t%12s\t%15s\n",
 			pcon->data[pos].name,
 			pcon->data[pos].age,
