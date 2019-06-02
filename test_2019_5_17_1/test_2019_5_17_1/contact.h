@@ -1,14 +1,14 @@
-//´´½¨Ò»¸öÍ¨Ñ¶Â¼
-//1000¸öÈËµÄĞÅÏ¢
-//Ã¿¸öÈËµÄĞÅÏ¢£ºĞÕÃû¡¢ÄêÁä¡¢µç»°¡¢×¡Ö·¡¢ĞÔ±ğ
+//åˆ›å»ºä¸€ä¸ªé€šè®¯å½•
+//1000ä¸ªäººçš„ä¿¡æ¯
+//æ¯ä¸ªäººçš„ä¿¡æ¯ï¼šå§“åã€å¹´é¾„ã€ç”µè¯ã€ä½å€ã€æ€§åˆ«
 
-//1.Ìí¼ÓÈËµÄĞÅÏ¢
-//2.É¾³ıÈËµÄĞÅÏ¢
-//3.ĞŞ¸ÄÈËµÄĞÅÏ¢
-//4.²éÕÒĞÅÏ¢
-//5.°²ÅÅxxxÅÅĞò
-//6.´òÓ¡Í¨Ñ¶Â¼µÄĞÅÏ¢
-//0.ÍË³ö
+//1.æ·»åŠ äººçš„ä¿¡æ¯
+//2.åˆ é™¤äººçš„ä¿¡æ¯
+//3.ä¿®æ”¹äººçš„ä¿¡æ¯
+//4.æŸ¥æ‰¾ä¿¡æ¯
+//5.å®‰æ’xxxæ’åº
+//6.æ‰“å°é€šè®¯å½•çš„ä¿¡æ¯
+//0.é€€å‡º
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -36,11 +36,11 @@ typedef struct PeoInfo
 	char tele[MAX_TELE];
 	char addr[MAX_ADDR];
 }PeoInfo;
-//Í¨Ñ¶Â¼½á¹¹
+//é€šè®¯å½•ç»“æ„
 typedef struct Contact
 {
-	struct PeoInfo data[MAX];//1000¸öÈËµÄĞÅÏ¢
-	int sz;//¼ÇÂ¼µ±Ç°ÓĞ¶àÉÙ¸öÈËµÄĞÅÏ¢
+	struct PeoInfo data[MAX];//1000ä¸ªäººçš„ä¿¡æ¯
+	int sz;//è®°å½•å½“å‰æœ‰å¤šå°‘ä¸ªäººçš„ä¿¡æ¯
 }Contact;
 void InitContact(Contact* pcon);
 void AddContact(Contact* pcon);
@@ -49,3 +49,4 @@ void DelContact(Contact* pcon);
 void SearchContact(const Contact* pcon);
 void ModifyContact(Contact* pcon);
 void SortContact(Contact* pcon);
+void EmptyContact(Contact *pcon);
